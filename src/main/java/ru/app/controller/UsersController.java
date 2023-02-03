@@ -1,12 +1,13 @@
-package web.controller;
+package ru.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import web.models.User;
-import web.services.UserService;
+import ru.app.model.User;
+import ru.app.service.UserService;
+
 
 
 @Controller
@@ -26,7 +27,7 @@ public class UsersController {
 	}
 
 	@GetMapping("/addUser")
-	public String newPerson(@ModelAttribute("user") User user) {
+	public String newUser(@ModelAttribute("user") User user) {
 		return "addUser";
 	}
 
@@ -38,7 +39,7 @@ public class UsersController {
 
 	@GetMapping("/{id}/show")
 	public String show(@PathVariable("id") int id, Model model) {
-		model.addAttribute("edited_user", userService.findOne(id));
+		model.addAttribute("edited_user", userService.findUser(id));
 		return "edit";
 	}
 

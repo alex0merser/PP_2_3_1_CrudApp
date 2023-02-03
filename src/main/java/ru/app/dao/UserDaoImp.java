@@ -1,8 +1,10 @@
-package web.repository;
+package ru.app.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import web.models.User;
+import ru.app.model.User;
+
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -25,7 +27,7 @@ public class UserDaoImp implements UserDao{
 
     @Override
     public void removeUser(int id) {
-            entityManager.remove(findOne(id));
+            entityManager.remove(findUser(id));
     }
 
     @Override
@@ -34,7 +36,7 @@ public class UserDaoImp implements UserDao{
     }
 
     @Override
-    public User findOne(int id) {
+    public User findUser(int id) {
         return entityManager.find(User.class, id);
     }
 

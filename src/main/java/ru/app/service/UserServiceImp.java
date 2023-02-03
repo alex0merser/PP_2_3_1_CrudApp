@@ -1,17 +1,16 @@
-package web.services;
+package ru.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.repository.UserDao;
-import web.models.User;
+import ru.app.dao.UserDao;
+import ru.app.model.User;
 
 
 import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService{
-
     private UserDao userDao;
 
     @Autowired
@@ -37,8 +36,8 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public User findOne(int id) {
-        return userDao.findOne(id);
+    public User findUser(int id) {
+        return userDao.findUser(id);
     }
 
     @Override

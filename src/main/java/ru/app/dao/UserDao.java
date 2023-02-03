@@ -1,16 +1,18 @@
-package web.repository;
+package ru.app.dao;
 
-import web.models.User;
+import ru.app.model.User;
 
 import java.util.List;
 
 public interface UserDao {
+
     void addUser(User user);
+
     void removeUser(int id);
     List<User> getAllUsers();
 
 
-    User findOne(int id);
+    User findUser(int id);
 
     void update(int id, User user);
 }

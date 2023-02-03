@@ -1,4 +1,4 @@
-package web.config;
+package ru.app.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -23,12 +23,13 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@ComponentScan(value = "java")
+@EnableJpaRepositories("ru.app.dao")
+@ComponentScan(value = "ru.app")
 public class HibernateConfig {
     private final Environment env;
 
     @Autowired
-    public HibernateConfig(Environment env, ApplicationContext applicationContext) {
+    public HibernateConfig(Environment env) {
         this.env = env;
     }
 
@@ -47,7 +48,7 @@ public class HibernateConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
-        em.setPackagesToScan("web.models");
+        em.setPackagesToScan("ru.app.model");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         em.setJpaProperties(getHibernateProperties());
         return em;
@@ -70,7 +71,6 @@ public class HibernateConfig {
 
     @Bean
     public PlatformTransactionManager transactionManager() {
-
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
