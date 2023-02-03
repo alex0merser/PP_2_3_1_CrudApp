@@ -4,18 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.app.model.User;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserDaoImp implements UserDao{
+public class UserDaoImp implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
     public UserDaoImp(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -27,7 +25,7 @@ public class UserDaoImp implements UserDao{
 
     @Override
     public void removeUser(int id) {
-            entityManager.remove(findUser(id));
+        entityManager.remove(findUser(id));
     }
 
     @Override
@@ -44,6 +42,7 @@ public class UserDaoImp implements UserDao{
     public void update(int id, User user) {
         User oldUser = entityManager.find(User.class, id);
         oldUser.setFirstName(user.getFirstName());
+        oldUser.setLastName(user.getLastName());
         oldUser.setAge(user.getAge());
     }
 }

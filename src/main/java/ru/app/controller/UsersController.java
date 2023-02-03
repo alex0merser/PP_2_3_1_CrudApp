@@ -9,53 +9,51 @@ import ru.app.model.User;
 import ru.app.service.UserService;
 
 
-
 @Controller
 @RequestMapping("/users")
 public class UsersController {
-	private UserService userService;
+    private UserService userService;
 
-	@Autowired
-	public UsersController(UserService userService) {
-		this.userService = userService;
-	}
+    @Autowired
+    public UsersController(UserService userService) {
+        this.userService = userService;
+    }
 
-	@GetMapping()
-	public String printUsers(ModelMap model) {
-		model.addAttribute("users", userService.getAllUsers());
-		return "index";
-	}
+    @GetMapping()
+    public String printUsers(ModelMap model) {
+        model.addAttribute("users", userService.getAllUsers());
+        return "index";
+    }
 
-	@GetMapping("/addUser")
-	public String newUser(@ModelAttribute("user") User user) {
-		return "addUser";
-	}
+    @GetMapping("/addUser")
+    public String newUser(@ModelAttribute("user") User user) {
+        return "addUser";
+    }
 
-	@PostMapping()
-	public String create(@ModelAttribute("user") User user) {
-		userService.addUser(user);
-		return "redirect:/users";
-	}
+    @PostMapping()
+    public String create(@ModelAttribute("user") User user) {
+        userService.addUser(user);
+        return "redirect:/users";
+    }
 
-	@GetMapping("/{id}/show")
-	public String show(@PathVariable("id") int id, Model model) {
-		model.addAttribute("edited_user", userService.findUser(id));
-		return "edit";
-	}
+    @GetMapping("/{id}/show")
+    public String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("edited_user", userService.findUser(id));
+        return "edit";
+    }
 
-	@PatchMapping("/{id}")
-	public String update(@ModelAttribute("edited_user") User user,
-						 @PathVariable("id") int id) {
-		userService.update(id, user);
-		return "redirect:/users";
-	}
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("edited_user") User user,
+                         @PathVariable("id") int id) {
+        userService.update(id, user);
+        return "redirect:/users";
+    }
 
-	@DeleteMapping("/{id}/show")
-	public String delete(@PathVariable("id") int id){
-		userService.removeUser(id);
-		return "redirect:/users";
-	}
-
+    @DeleteMapping("/{id}/show")
+    public String delete(@PathVariable("id") int id) {
+        userService.removeUser(id);
+        return "redirect:/users";
+    }
 
 
 }

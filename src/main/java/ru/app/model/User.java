@@ -17,7 +17,6 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "age")
     private int age;
 
     public User(String firstName, String lastName, int age) {

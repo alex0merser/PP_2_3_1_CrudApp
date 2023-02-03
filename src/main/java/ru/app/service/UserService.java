@@ -2,6 +2,7 @@ package ru.app.service;
 
 
 
+import org.springframework.stereotype.Service;
 import ru.app.model.User;
 
 import java.util.List;
